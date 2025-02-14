@@ -1,0 +1,34 @@
+letterlist= split(word)
+newwordlist=[]
+print(letterlist)
+for f in letterlist:
+    visible=['a','e','i','o','u',' ']
+    if f not in visible:
+        newwordlist.append('_')
+
+    else:
+        newwordlist.append(f)
+
+print('newwordlist is',*newwordlist, sep=' ')
+x=0
+lives=0
+z=0
+while x<len(letterlist):
+    letter= input()
+    if letter in letterlist:
+        correct_input_place=letterlist.index(letter)
+        newwordlist.pop(correct_input_place)
+        newwordlist.insert(correct_input_place,letter)
+        print(*newwordlist)
+        z=z+1
+    else:
+        lives=lives+1
+        print('no')
+    x=x+1
+    if lives==4:
+        print('u lose')
+        quit()
+    if z==len(letterlist):
+        print('Yay! u win!')
+#if i enter vowels or space
+#if i do some right beech mai some galat and then some right toh galat wala counter hil jaata hai
