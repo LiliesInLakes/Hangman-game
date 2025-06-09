@@ -1,6 +1,17 @@
-letterlist= split(word)
-newwordlist=[]
-print(letterlist)
+import random
+list_o_names = ['orange', 'fruit']
+pos_of_word = random.randint(0, len(list_o_names)-1)
+#print('position of word is ', pos_of_word)
+word = list_o_names[pos_of_word]
+vowel = ['a', 'e', 'i', 'o', 'u']
+#print('word is ', word)
+def split(word):
+    return list(word)
+letterlist = split(word)
+newwordlist = []
+
+#print(letterlist)
+
 for f in letterlist:
     visible=['a','e','i','o','u',' ']
     if f not in visible:
@@ -9,26 +20,33 @@ for f in letterlist:
     else:
         newwordlist.append(f)
 
-print('newwordlist is',*newwordlist, sep=' ')
-x=0
-lives=0
-z=0
-while x<len(letterlist):
-    letter= input()
+print('word is',*newwordlist, sep=' ')
+lives = 0
+z = 0
+while z < len(letterlist):
+    letter = input()
     if letter in letterlist:
-        correct_input_place=letterlist.index(letter)
-        newwordlist.pop(correct_input_place)
-        newwordlist.insert(correct_input_place,letter)
-        print(*newwordlist)
-        z=z+1
-    else:
-        lives=lives+1
-        print('no')
-    x=x+1
-    if lives==4:
-        print('u lose')
+        if letter not in newwordlist:
+            correct_input_place = letterlist.index(letter)
+            newwordlist.pop(correct_input_place)
+            newwordlist.insert(correct_input_place, letter)
+            print(*newwordlist)
+            z = z+1
+
+    if letter in visible:
+        print("invalid")
+        #print('letter in visible z=', z, 'lives=', lives)
+    elif letter not in letterlist and letterlist not in visible:
+        lives = lives+1
+        print('no, lives left=', lives)
+        #print('else function z=', z, 'lives=', lives)
+    if lives == 4:
+        print('You lose')
         quit()
-    if z==len(letterlist):
+    if newwordlist==letterlist:
         print('Yay! u win!')
-#if i enter vowels or space
-#if i do some right beech mai some galat and then some right toh galat wala counter hil jaata hai
+
+
+
+#apple jaise word mai double p nahi kar paa raha
+# agar mai enter kar doon
