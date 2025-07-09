@@ -1,5 +1,5 @@
 import random
-list_o_names = ['orange', 'fruit']
+list_o_names = ['orange']
 pos_of_word = random.randint(0, len(list_o_names)-1)
 #print('position of word is ', pos_of_word)
 word = list_o_names[pos_of_word]
@@ -22,31 +22,39 @@ for f in letterlist:
 
 print('word is',*newwordlist, sep=' ')
 lives = 0
-z = 0
-while z < len(letterlist):
-    letter = input()
-    if letter in letterlist:
-        if letter not in newwordlist:
-            correct_input_place = letterlist.index(letter)
-            newwordlist.pop(correct_input_place)
-            newwordlist.insert(correct_input_place, letter)
-            print(*newwordlist)
-            z = z+1
+previousInput=[]
+while lives<4 and newwordlist!=letterlist:
+    letter=input()
+    if letter.isalpha():
+        if len(letter) != 1:
+            print('input is invalid. please enter a single letter')
+        else:
+            if letter in visible:
+                print('invalid. please give another letter that is not a vowel')
+            if letter in previousInput:
+                print('You have already entered this letter. Please enter a new letter')
+            elif letter in letterlist:
+                i=0
+                while i in range(len(letterlist)-1):
+                    if letter == letterlist[i]:
+                        newwordlist.pop(i)
+                        newwordlist.insert(i, letter)
+                        i=i+1
+                    else:
+                        i=i+1
+                print(*newwordlist, sep=' ')
+                previousInput.append(letter)
+            else:
+                lives=lives+1
+                print(letter, 'is not in word. lives left=', lives)
+                print(*newwordlist, sep=' ')
+                previousInput.append(letter)
 
-    if letter in visible:
-        print("invalid")
-        #print('letter in visible z=', z, 'lives=', lives)
-    elif letter not in letterlist and letterlist not in visible:
-        lives = lives+1
-        print('no, lives left=', lives)
-        #print('else function z=', z, 'lives=', lives)
-    if lives == 4:
-        print('You lose')
-        quit()
-    if newwordlist==letterlist:
-        print('Yay! u win!')
-
-
-
-#apple jaise word mai double p nahi kar paa raha
-# agar mai enter kar doon
+    if letter.isalpha() is False:
+        print('input is not a letter. please enter a letter')
+if lives <= 4 and newwordlist==letterlist:
+    print('Yay! u win')
+    quit()
+else:
+    print('You lose. The word was', word)
+    quit()
